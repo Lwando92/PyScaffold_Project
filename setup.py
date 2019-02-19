@@ -9,9 +9,18 @@
     Learn more under: https://pyscaffold.org/
 """
 import sys
+import os
+
 
 from pkg_resources import require, VersionConflict
 from setuptools import setup
+
+workers = int(os.environ.get('GUNICORN_PROCESSES', '3'))
+threads = int(os.environ.get('GUNICORN_THREADS', '1'))
+
+forwarded_allow_ips = '*'
+secure_scheme_headers = { 'X-Forwarded-Proto': 'https' }
+
 
 try:
     require('setuptools>=38.3')
