@@ -58,6 +58,11 @@ except Exception as e:
 
 # -- General configuration -----------------------------------------------------
 
+workers = int(os.environ.get('GUNICORN_PROCESSES', '3'))
+threads = int(os.environ.get('GUNICORN_THREADS', '1'))
+
+forwarded_allow_ips = '*'
+secure_scheme_headers = { 'X-Forwarded-Proto': 'https' }
 # If your documentation needs a minimal Sphinx version, state it here.
 # needs_sphinx = '1.0'
 
